@@ -6,7 +6,7 @@ while(funnyguy):
         age = int(input("What's your age in years? "))
         agem = int(input("What month is it (1-12)?: "))
         aged = int(input("What day is it (1-31)?: "))
-        if agem < 1 or agem > 12 or aged < 1 or age > 31:
+        if agem < 1 or agem > 12 or aged < 1 or aged > 31 or age < 0:
             print("not funny")
         else:
             aget = (age * 365) + (agem * 30) + aged
