@@ -10,13 +10,13 @@ class Conta():
     else:
       print("Ja ativou")
   def Debito(self,valor):
-    if self.Ativo == True and self.Saldo - valor >= 0:
+    if self.Ativo == True and self.Saldo - valor >= 0 and valor >= 0:
       self.Saldo = self.Saldo - valor
       print(self.Saldo)
     else:
-      print("uhh, tá pedindo demaisss")
+      print("uhh, tá pedindo demaisss ou coloco negativo, que feio")
   def Credito(self,valor):
-    if self.Ativo == True :
+    if self.Ativo == True and valor >= 0 :
       self.Saldo = self.Saldo + valor
       print(self.Saldo)
 
@@ -33,7 +33,7 @@ class Corrente(Conta):
     super().__init__(numero,cpf,saldo,ativo)
     self.NTalao = nTalao
   def Talao(self, numero):
-    if numero <= self.NTalao:
+    if numero <= self.NTalao and numero >= 0:
       self.Saldo = self.Saldo - 30
       self.NTalao -= numero
     else:
@@ -45,9 +45,9 @@ class Especial(Conta):
     super().__init__(numero,cpf,saldo,ativo)
     self.Limite = limite
   def Debito(self, limite):
-    if self.Saldo - limite >= 0:
+    if self.Saldo - limite >= 0 and limite >= 0:
        self.Saldo -= limite
-    elif self.Saldo + self.Limite - limite >= 0:
+    elif self.Saldo + self.Limite - limite >= 0 and limite >= 0:
       self.Limite = self.Limite + self.Saldo - limite
       self.Saldo = 0
     else:
@@ -58,7 +58,7 @@ class Empresa(Conta):
         super().__init__(numero,cpf,saldo,ativo)
         self.LimEmpresitmo = limEmprestimo
     def Emprestimo(self, emprestimo):
-        if emprestimo <= self.LimEmpresitmo:
+        if emprestimo <= self.LimEmpresitmo and emprestimo >= 0:
             self.Saldo = emprestimo + self.Saldo
             self.LimEmpresitmo = self.LimEmpresitmo - emprestimo
         else:
@@ -69,7 +69,7 @@ class Estudantil (Conta):
         super().__init__(numero,cpf,saldo,ativo)
         self.Limiteimite = limite
     def Emprestimo(self, emprestimo):
-        if emprestimo <= self.Limiteimite:
+        if emprestimo <= self.Limiteimite and emprestimo >= 0:
             self.Saldo = emprestimo + self.Saldo
             self.Limiteimite = self.Limiteimite - emprestimo
         else:
