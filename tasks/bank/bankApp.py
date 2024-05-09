@@ -1,10 +1,10 @@
 from accounts import *
 
-P1 = Poupanca(14,12123,231231,10,False)
-C1 = Corrente(10,123123,123123,False,3)
+P1 = Poupanca(14,12123,231231,0,False)
+C1 = Corrente(10,123123,0,False,3)
 E1 = Especial(1000,0,0,0,False)
-EM1 = Empresa(123123,123123,123,False,10000)
-ES1 = Estudantil(123132,123123,123132,False,5000)
+EM1 = Empresa(123123,123123,0,False,10000)
+ES1 = Estudantil(123132,123123,0,False,5000)
 
 def Poupation():
     try:
@@ -129,19 +129,14 @@ try:
         op = input("Opção ")
         if op == "1":
             Poupation()
-            break
         elif op == "2":
             Correnting()
-            break
         elif op == "3":
             Speacialing()
-            break
         elif op == "4":
             Empresing()
-            break
         elif op == "5":
             Estudaling()
-            break
         elif op == "6":
             break
         else:
