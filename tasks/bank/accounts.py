@@ -51,7 +51,7 @@ class Especial(Conta):
       self.Limite = self.Limite + self.Saldo - limite
       self.Saldo = 0
     else:
-       print("Falta de saldo, realize um credito")
+       print("Falta de saldo, realize um credito, ou colocou numero negativo")
 
 class Empresa(Conta):
     def __init__(self, numero,cpf,saldo,ativo,limEmprestimo):
@@ -62,7 +62,7 @@ class Empresa(Conta):
             self.Saldo = emprestimo + self.Saldo
             self.LimEmpresitmo = self.LimEmpresitmo - emprestimo
         else:
-           print("Tá pedindo demaisssss!!!!!")
+           print("Tá pedindo demaisssss!!!!! (ou colocou negativo)")
 
 class Estudantil (Conta):
     def __init__(self, numero,cpf,saldo,ativo,limite):
@@ -73,7 +73,7 @@ class Estudantil (Conta):
             self.Saldo = emprestimo + self.Saldo
             self.Limiteimite = self.Limiteimite - emprestimo
         else:
-           print("Tá pedindo demaisssss!!!!!")
+           print("Tá pedindo demaisssss!!!!! (ou colocou negativo)")
 
 
 
