@@ -225,7 +225,7 @@ def Empresing():
                         bonitin = (EM1.Saldo,EM1.LimEmpresitmo,EM1.Numero)
                         cursor.execute("update Empresarial set saldo = %s, bonus = %s where numero = %s",bonitin)
                         connection.commit()
-
+                break
             else:
                 opof = input("Parece que você não tem uma conta! Quer criar uma ou logar?(C/L)")
                 if opof == "C" or opof == "c":
@@ -258,7 +258,7 @@ def Estudaling():
         while True:
             if ES1.Numero != None:
                 for i in range(10):
-                    print("Saldo atual :", ES1.Saldo,"\nLimite: ", ES1.LimEmpresitmo)
+                    print("Saldo atual :", ES1.Saldo,"\nLimite: ", ES1.Limiteimite)
                     print("Movimento : D - Debito, C - Credito, E - Emprestimo")
                     op = input("Opção ")
                     if op == "D" or op == "d":
@@ -279,6 +279,7 @@ def Estudaling():
                         bonitin = (ES1.Saldo,ES1.Limiteimite,ES1.Numero)
                         cursor.execute("update Estudantil set saldo = %s, bonus = %s where numero = %s",bonitin)
                         connection.commit()
+                break
             else:
                 opof = input("Parece que você não tem uma conta! Quer criar uma ou logar?(C/L)")
                 if opof == "C" or opof == "c":
@@ -302,8 +303,8 @@ def Estudaling():
                         ES1 = Estudantil(data[0][1],data[0][2],data[0][3],True,data[0][4])
                     else:
                         print("Não achei")
-    except:
-        print("Vai se ferra meu, acha que eu sou quem???")
+    except Exception as e:
+        print(e)
 
 
 try:
