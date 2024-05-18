@@ -67,7 +67,6 @@ def Atualizar():
                         item.incluir(amount)
                         cursor.execute("update produtoacademia set estoque = %s where id_produtoacademia = %s",(item.estoque,item.id))
                         connection.commit()
-                        print("Item adicionado com sucesso!")
                         time.sleep(3)
                         break
                     elif op == 'R':
@@ -75,7 +74,6 @@ def Atualizar():
                         item.retirar(amount)
                         cursor.execute("update produtoacademia set estoque = %s where id_produtoacademia = %s",(item.estoque,item.id))
                         connection.commit()
-                        print("Item removido com sucesso!")
                         time.sleep(3)
                         break
                 else:
