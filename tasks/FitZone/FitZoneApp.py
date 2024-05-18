@@ -102,7 +102,7 @@ def Comprar():
                 if len(response) > 0:
                     item = Product(response[0][0],response[0][1],response[0][2],response[0][3],response[0][4])
                     qtde = int(input("Quantos você quer desse produto?: "))
-                    if item.estoque > 0 and qtde <= item.estoque:
+                    if item.estoque > 0 and qtde <= item.estoque and qtde > 0:
                         if len(conta.carrinho) > 0:
                             yatiene = False
                             for i in conta.carrinho:
@@ -158,6 +158,7 @@ def Carrinho():
                 for i in conta.carrinho:
                     print("Nome: ",i[1], " Valor: ",i[3], " Quantidade: ",i[5])
                 print("Preço final: ",finalPrice)
+                conta.retirar()
                 time.sleep(4)
             else:
                 pass
