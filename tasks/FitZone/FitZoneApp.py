@@ -181,6 +181,9 @@ try:
                 Comprar()
             elif op == '4':
                 Carrinho()
+            elif op == '5':
+                print("Até breve!")
+                break
         else:
             op = input("Parece que você não está cadastrado! Deseja fazer login ou criar uma conta?(L/C)").upper()
             if op == "L":
