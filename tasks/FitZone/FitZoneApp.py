@@ -1,6 +1,9 @@
+#Mudanças foram feitas no dia 19/5 para adicionar novas funções de deletar e mudar outros campos dos produtos
+
 import pymysql as psql
 import random as rdm
 import time
+import os
 from Accounts import *
 from Products import *
 
@@ -53,29 +56,52 @@ def Atualizar():
         cursor.execute("select * from produtoacademia")
         itens = cursor.fetchall()
         if len(itens) > 0:
+            print("-" * 20)
+            print("Itens disponíveis")
             while True:
                 for i in itens:
-                    print(i)
+                    print("ID: ",i[0]," Nome: ",i[1], " Valor: ",i[3], " Estoque: ",i[4])
                 change = input("Qual o id do item que deseja alterar?: ")
                 cursor.execute("select * from produtoacademia where id_produtoacademia = %s",change)
                 response = cursor.fetchall()
                 if len(response) > 0:
                     item = Product(response[0][0],response[0][1],response[0][2],response[0][3],response[0][4])
-                    op = input("Deseja adicionar ou remover do estoque desse item?(A/R): ").upper()
-                    if op == 'A':
-                        amount = int(input("Quanto você deseja adicionar?: "))
-                        item.incluir(amount)
-                        cursor.execute("update produtoacademia set estoque = %s where id_produtoacademia = %s",(item.estoque,item.id))
+                    decision = input("Deseja modificar campos desse produto, deleta-lo ou somente mudar o estoque?(M/D/S): ").upper()
+                    if decision == 'S':
+                        op = input("Deseja adicionar ou remover do estoque desse item?(A/R): ").upper()
+                        if op == 'A':
+                            amount = int(input("Quanto você deseja adicionar?: "))
+                            item.incluir(amount)
+                            cursor.execute("update produtoacademia set estoque = %s where id_produtoacademia = %s",(item.estoque,item.id))
+                            connection.commit()
+                            time.sleep(3)
+                            break
+                        elif op == 'R':
+                            amount = int(input("Quanto você deseja remover?: "))
+                            item.retirar(amount)
+                            cursor.execute("update produtoacademia set estoque = %s where id_produtoacademia = %s",(item.estoque,item.id))
+                            connection.commit()
+                            time.sleep(3)
+                            break
+                        else:
+                            print("Bobão")
+                    elif decision == 'D':
+                        print("Deletando...")
+                        cursor.execute("delete from produtoacademia where id = %s", item.id)
                         connection.commit()
+                        print("Item deletado com sucesso!")
                         time.sleep(3)
                         break
-                    elif op == 'R':
-                        amount = int(input("Quanto você deseja remover?: "))
-                        item.retirar(amount)
-                        cursor.execute("update produtoacademia set estoque = %s where id_produtoacademia = %s",(item.estoque,item.id))
+                    elif decision == 'M':
+                        desc = input("Qual a nova descricao do produto?: ")
+                        valor = input("Qual o novo valor do produto?: ")
+                        cursor.execute("update produtoacademia set descricao = %s, valor = %s where id_produtoacademia = %s",(desc,valor,item.id))
                         connection.commit()
+                        print("Item atualizado com sucesso!")
                         time.sleep(3)
                         break
+                    else:
+                        print("Bobão")
                 else:
                     print("Não achei")
                     time.sleep(1)
@@ -93,9 +119,11 @@ def Comprar():
         cursor.execute("select id_produtoacademia, descricao, marca, valor, estoque from produtoacademia")
         itens = cursor.fetchall()
         if len(itens) > 0:
+            print("-" * 20)
+            print("Itens disponíveis")
             while True:
                 for i in itens:
-                    print(i)
+                    print("ID: ",i[0]," Nome: ",i[1], " Valor: ",i[3], " Estoque: ",i[4])
                 change = input("Qual o id do item que deseja comprar?: ")
                 cursor.execute("select id_produtoacademia, descricao, marca, valor, estoque from produtoacademia where id_produtoacademia = %s",change)
                 response = cursor.fetchall()
@@ -170,6 +198,7 @@ def Carrinho():
         time.sleep(3)
 try:
     while True:
+        os.system("clear")
         if conta.email != None:
             print(f"Seja bem vindo a FitZone!!!\nEmail logado: {conta.email}\nO que deseja fazer?\n1 - Cadastrar Item\n2 - Atualizar Item\n3 - Colocar Itens no Carrinho\n4 - Ver Carrinho\n5 - Sair")
             op = input("Opção ")
