@@ -87,7 +87,7 @@ def Atualizar():
                             print("Bobão")
                     elif decision == 'D':
                         print("Deletando...")
-                        cursor.execute("delete from produtoacademia where id = %s", item.id)
+                        cursor.execute("delete from produtoacademia where id_produtoacademia = %s", item.id)
                         connection.commit()
                         print("Item deletado com sucesso!")
                         time.sleep(3)
