@@ -8,6 +8,7 @@ def produtos(request):
     #Salvar os dados da tela
     novo_produto = Produto()
     novo_produto.nome = request.POST.get('nome')
+    novo_produto.marca = request.POST.get('marca')
     novo_produto.valor = request.POST.get('valor')
     novo_produto.estoque = request.POST.get('estoque')
     novo_produto.save()
